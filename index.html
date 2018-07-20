@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h1>Word: <span class ="underscore-array"></span></h1>  
+<h3>Guesses Remaining: <span class ="guess-remaining"></span></h3>  
+</body>
+</html>
+<script>
+//make an array of words
+//select a word randomly
+//split choses word into an array
+//create a FOR loop so that we can compare what the user key was to each letter of the word!
+
+
+var wordbank =["apple", "pear", "banana","stawberry"]
+
+var index = Math.floor(Math.random() * wordbank.length)
+
+var chosenword =wordbank[index]
+var chosenwordarray=chosenword.split("")
+var underscoreArray=[]
+for (var i =0; i < chosenwordarray.length; i++){
+    underscoreArray.push("_ ")
+}
+var underscoreString = underscoreArray.join("")
+console.log (chosenwordarray)
+console.log (underscoreArray)
+document.querySelector(".underscore-array").innerHTML = underscoreString
+var guessRemaining=10
+
+document.querySelector(".guess-remaining").innerHTML = guessRemaining
+
+document.addEventListener("keyup",function(event){
+    guessRemaining--
+       
+    for (var i =0; i < chosenwordarray.length; i++) {
+        if(event.key==chosenwordarray[i]){
+            underscoreArray[i] = chosenwordarray[i]
+            var underscoreString = underscoreArray.join("")
+            document.querySelector(".underscore-array").innerHTML = underscoreString
+            guessRemaining++
+            setTimeout(function(){
+                alert("That letter is in the word")
+            },70)
+            
+        }
+    }
+    document.querySelector(".guess-remaining").innerHTML = guessRemaining
+})
+
+//the next steps
+//inside event listener on #39  you can join () both the word array and underscore array back to strings
+//once they are strings they can be compared to each other
+//once bother strings match each other you have won the game
+//determine functionality for win guesses run out
+
+
+</script>
